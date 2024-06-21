@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AuctionService.Data.Migrations
 {
     [DbContext(typeof(AuctionDbContext))]
-    [Migration("20240621100629_InitialCreate")]
+    [Migration("20240621125750_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -30,6 +30,9 @@ namespace AuctionService.Data.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
+
+                    b.Property<DateTime>("AuctionEnd")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("timestamp with time zone");
@@ -98,7 +101,7 @@ namespace AuctionService.Data.Migrations
             modelBuilder.Entity("AuctionService.Entities.Item", b =>
                 {
                     b.HasOne("AuctionService.Entities.Auction", "Auction")
-                        .WithOne("item")
+                        .WithOne("Item")
                         .HasForeignKey("AuctionService.Entities.Item", "AuctionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -108,7 +111,7 @@ namespace AuctionService.Data.Migrations
 
             modelBuilder.Entity("AuctionService.Entities.Auction", b =>
                 {
-                    b.Navigation("item");
+                    b.Navigation("Item");
                 });
 #pragma warning restore 612, 618
         }

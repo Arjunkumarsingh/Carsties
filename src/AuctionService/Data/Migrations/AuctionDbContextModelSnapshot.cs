@@ -28,6 +28,9 @@ namespace AuctionService.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<DateTime>("AuctionEnd")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -95,7 +98,7 @@ namespace AuctionService.Data.Migrations
             modelBuilder.Entity("AuctionService.Entities.Item", b =>
                 {
                     b.HasOne("AuctionService.Entities.Auction", "Auction")
-                        .WithOne("item")
+                        .WithOne("Item")
                         .HasForeignKey("AuctionService.Entities.Item", "AuctionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -105,7 +108,7 @@ namespace AuctionService.Data.Migrations
 
             modelBuilder.Entity("AuctionService.Entities.Auction", b =>
                 {
-                    b.Navigation("item");
+                    b.Navigation("Item");
                 });
 #pragma warning restore 612, 618
         }
